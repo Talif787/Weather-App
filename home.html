@@ -1,33 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Signika&display=swap");
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Signika", sans-serif;
+      }
+
+      body {
+        background: rgb(212, 195, 173);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      html,
+      body {
+        /* font-size: 62.5%; */
+        height: 100%;
+      }
+
+      .box {
+        width: 20vw;
+        height: 80vh;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.2rem 3rem lightgray;
+        background: lightblue;
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+        min-width: 20rem;
+        min-height: 35rem;
+      }
+
+      .wave {
+        opacity: 0.3;
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        background: white;
+        width: 50rem;
+        height: 50rem;
+        margin-left: -25rem;
+        margin-top: -25rem;
+        transform-origin: 50% 48%;
+        border-radius: 43%;
+        animation: drift 3000ms infinite linear;
+        z-index: 1;
+      }
+      .wave.-three {
+        animation: drift 5000ms infinite linear;
+        z-index: 2 !important;
+        opacity: 0.2;
+      }
+      .wave.-two {
+        animation: drift 7000ms infinite linear;
+        z-index: 3 !important;
+        opacity: 0.1;
+      }
+      .box:after {
+        content: "";
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 11;
+        transform: translate3d(0, 0, 0);
+      }
+
+      @keyframes drift {
+        from {
+          transform: rotate(0deg);
+        }
+        from {
+          transform: rotate(360deg);
+        }
+      }
+
+      .information {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 45%;
+        z-index: 4;
+      }
+
+      .location {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-weight: 800;
+        font-size: 3rem;
+        font-weight: 500;
+      }
+
+      .fa-street-view {
+        animation: rotates 3s linear infinite alternate;
+      }
+
+      @keyframes rotates {
+        from {
+          transform: translate(-0.5rem);
+        }
+        to {
+          transform: translate(0.5rem);
+        }
+      }
+
+      #date {
+        text-align: center;
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+
+      .temp {
+        margin-top: 2.5rem;
+        text-align: center;
+        font-size: 3rem;
+      }
+
+      .temp-min-max {
+        text-align: center;
+        margin-top: 0.3rem;
+        font-weight: 300;
+        font-size: 1.2rem;
+      }
+
+      .weather-condition {
+        height: 55%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3em;
+      }
+
+      .weather-condition .fas {
+        font-size: 6rem;
+        animation: fas-anime 3s linear infinite alternate;
+      }
+
+      @keyframes fas-anime {
+        from {
+          transform: scale(0.8);
+        }
+        to {
+          transform: scale(1.2);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .box {
+          width: 90vw;
+          height: 80vh;
+        }
+        .wave {
+          top: 85%;
+        }
+        .weather-condition {
+          font-size: 5rem;
+        }
+        .information {
+          font-size: 5em;
+        }
+      }
+
+      @media (max-height: 500px) {
+        .box {
+          height: 80vh;
+        }
+        .wave {
+          top: 135%;
+        }
+      }
+
+      body > span {
+        width: 100vw;
+        text-align: center;
+        color: grey;
+      }
+    </style>
+
     <title>Weather App</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="box">
-        <div class="wave -one"></div>
-        <div class="wave -two"></div>
-        <div class="wave -three"></div>
+      <div class="wave -one"></div>
+      <div class="wave -two"></div>
+      <div class="wave -three"></div>
 
-        <div class="weather-condition">
-            <i class="fas fa-sun" style="color: #eccc68"></i>
-            
-        </div>
+      <div class="weather-condition">
+        <i class="fas fa-sun" style="color: #eccc68"></i>
+      </div>
 
-        <div class="information">
-            <h2 class="location">
-                <i class="fas fa-street-view"></i>
-                Pune, In
-            </h2>
-            <p id="date">WED | OCT 23 | 10.49AM</p>
-            <h1 class="temp">26.49 &#8451;</h1>
-            <h3 class="temp-min-max">Min 26.49 &#8451; | Max 26.49 &#8451;</h3>
-        </div>
+      <div class="information">
+        <h2 class="location">
+          <i class="fas fa-street-view"></i>
+          {%location%}, {%country%}
+        </h2>
+        <!-- WED | OCT 23 | 10.49AM -->
+        <p id="date"></p>
+        <h1 class="temp">{%tempVal%} &#8451;</h1>
+        <h3 class="temp-min-max">
+          Min {%tempmin%} &#8451; | Max {%tempmax%} &#8451;
+        </h3>
+      </div>
     </div>
-</body>
+
+    <script>
+      const currDate = document.getElementById("date");
+      function getCurrentDate() {
+        const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+        const months = [
+          "JAN",
+          "FEB",
+          "MAR",
+          "APR",
+          "MAY",
+          "JUN",
+          "JUL",
+          "AUG",
+          "SEP",
+          "OCT",
+          "NOV",
+          "DEC",
+        ];
+        const tempstatus = "{%tempstatus%}";
+        console.log(tempstatus);
+
+
+        if (tempstatus == "Sunny") {
+          document.getElementsByClassName("weather-condition")[0].innerHTML =
+            "<i class='fas fa-sun' style='color: #eccc68'></i>";
+        } else if (tempstatus == "Clouds") {
+          console.log("Hello clouds");
+          document.getElementsByClassName("weather-condition")[0].innerHTML =
+            "<i class='fas fa-cloud' style='color: #f1f2f6'></i>";
+        } else if (tempstatus == "Rainy") {
+          document.getElementsByClassName("weather-condition")[0].innerHTML =
+            "<i class='fas fa-cloud-rain' style='color: #a4b0be'></i>";
+        } else {
+          document.getElementsByClassName("weather-condition")[0].innerHTML =
+            "<i class='fas fa-cloud' style='color: #f1f2f6'></i>";
+        }
+
+        const d = new Date();
+        console.log(weekdays[d.getDay()]);
+        console.log(months[d.getMonth()]);
+        let hours = d.getHours();
+        let minutes = d.getMinutes();
+        let period = " AM";
+        if (hours > 11) {
+          period = " PM";
+        }
+        if (hours > 12) {
+          hours = hours - 12;
+        }
+        if (minutes <= 9) {
+          minutes = "0" + minutes;
+        }
+        currDate.innerHTML =
+          weekdays[d.getDay()] +
+          " | " +
+          months[d.getMonth()] +
+          " " +
+          d.getDate() +
+          " | " +
+          hours +
+          ":" +
+          minutes +
+          period;
+      }
+      getCurrentDate();
+    </script>
+  </body>
 </html>
